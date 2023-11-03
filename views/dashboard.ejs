@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+
+<%- include('partials/header') %>
+<body>
+
+<%- include('partials/navbar') %>
+
+<div class="container mt-5 p-2">
+    <div class="row justify-content-center">
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div id="customCard" class="card border-start-lg border-danger-subtle h-100 position-relative p-2">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between mb-2">
+                        <div class="flex-grow-1">
+                            <h3 class="text-danger-emphasis mb-2">Users</h3>
+                            <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
+                                Manage user data and perform CRUD operations.
+                            </div>
+                        </div>
+                        <div class="ms-2">
+                            <i class="fas fa-users fa-2x text-danger"></i>
+                        </div>
+                    </div>
+                    <a href="/user" class="btn btn-outline-danger">Go to Users</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6 mb-4">
+            <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
+                <div class="card-body">
+                    <div class="d-flex align-items-start justify-content-between mb-2">
+                        <div class="flex-grow-1">
+                            <h3 class="text-secondary mb-2">Workspace</h3>
+                            <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
+                                Manage Workspace data and perform CRUD operations.
+                            </div>
+                        </div>
+                        <div class="ms-2">
+                            <i class="fa-solid fa-house fa-beat fa-2x text-secondary"></i>
+                        </div>
+                    </div>
+                    <a href="/workspace" class="btn btn-outline-secondary">Go to Workspace</a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<%- include('partials/footer') %>
+</body>
+</html>

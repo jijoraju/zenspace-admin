@@ -1,0 +1,45 @@
+<%- include('../partials/header') %>
+<body>
+<%- include('../partials/navbar') %>
+
+<div class="mt-3">
+    <%- include('../partials/toastbar') %>
+</div>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center">
+        <h2>User Management</h2>
+        <div>
+            <a href="/user/new" class="btn btn-primary mr-2">Add New User</a>
+            <a href="/dashboard" class="btn btn-danger">Go Back</a>
+        </div>
+    </div>
+
+    <table class="table table-bordered mt-3">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>User Type</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% users.forEach(user => { %>
+            <tr>
+                <td><%= user.first_name %> <%= user.last_name %></td>
+                <td><%= user.email %></td>
+                <td><%= user.userType.type_description %></td>
+                <td>
+                    <a href="/user/<%= user.user_id %>/edit" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="/user/<%= user.user_id %>/delete" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+        <% }) %>
+        </tbody>
+    </table>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>
