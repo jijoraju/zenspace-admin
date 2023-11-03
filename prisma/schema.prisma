@@ -1,0 +1,166 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model UserType {
+  type_id          Int    @id @default(autoincrement())
+  type_description String
+  users            User[]
+}
+
+model User {
+  user_id         Int             @id @default(autoincrement())
+  first_name      String
+  last_name       String
+  email           String          @unique
+  password        String
+  mobile          String?         @unique
+  profile_picture String?
+  join_date       DateTime        @default(now())
+  user_type_id    Int
+  bookings        Booking[]
+  userPromotions  UserPromotion[]
+  userType        UserType        @relation(fields: [user_type_id], references: [type_id])
+}
+
+model Location {
+  location_id Int         @id @default(autoincrement())
+  name        String
+  province    String
+  latitude    Float
+  longitude   Float
+  workspaces  Workspace[]
+}
+
+model Workspace {
+  workspace_id       Int                  @id @default(autoincrement())
+  name               String
+  description        String
+  workspace_type     WorkspaceType
+  price_per_day      Float
+  no_of_spaces       Int
+  location           Location             @relation(fields: [location_id], references: [location_id])
+  location_id        Int
+  workspacePhotos    WorkspacePhoto[]
+  reviews            Review[]
+  bookings           Booking[]
+  workspaceAmenities WorkspaceAmenities[]
+  workspaceAddress   WorkspaceAddress     @relation(fields: [address_id], references: [workspace_address_id])
+  address_id         Int                  @unique
+}
+
+enum WorkspaceType {
+  ONE_DAY
+  MULTIPLE_DAYS
+}
+
+model WorkspaceAddress {
+  workspace_address_id Int        @id @default(autoincrement())
+  address              String
+  latitude             Float
+  longitude            Float
+  workspace            Workspace?
+}
+
+model WorkspacePhoto {
+  photo_id     Int       @id @default(autoincrement())
+  photo_url    String
+  workspace_id Int
+  workspace    Workspace @relation(fields: [workspace_id], references: [workspace_id])
+}
+
+model Review {
+  review_id    Int       @id @default(autoincrement())
+  rating       Float
+  comments     String?
+  review_date  DateTime  @default(now())
+  workspace_id Int
+  workspace    Workspace @relation(fields: [workspace_id], references: [workspace_id])
+}
+
+model Payment {
+  payment_id     Int            @id @default(autoincrement())
+  amount         Float?
+  payment_date   DateTime       @default(now())
+  payment_method PaymentMethod?
+  card_id        Int
+  bookings       Booking[]
+}
+
+enum PaymentMethod {
+  credit_card
+  PayPal
+}
+
+model Booking {
+  booking_id    Int            @id @default(autoincrement())
+  start_date    DateTime
+  end_date      DateTime
+  booking_date  DateTime       @default(now())
+  no_of_space   Int
+  total_price   String
+  workspace_id  Int
+  user_id       Int
+  payment_id    Int
+  workspace     Workspace      @relation(fields: [workspace_id], references: [workspace_id])
+  user          User           @relation(fields: [user_id], references: [user_id])
+  payment       Payment        @relation(fields: [payment_id], references: [payment_id])
+  notifications Notification[]
+}
+
+model Amenity {
+  amenity_id        Int                  @id @default(autoincrement())
+  description       String?
+  workspaceAmenties WorkspaceAmenities[]
+}
+
+model Notification {
+  notification_id   Int                @id @default(autoincrement())
+  message           String
+  notification_date DateTime           @default(now())
+  status            NotificationStatus
+  booking_id        Int
+  booking           Booking            @relation(fields: [booking_id], references: [booking_id])
+}
+
+enum NotificationStatus {
+  read
+  unread
+}
+
+model Promotion {
+  promotion_id        Int             @id @default(autoincrement())
+  promo_code          String          @unique
+  description         String
+  discount_percentage Int?
+  discount_amount     Int?
+  start_date          DateTime?
+  end_date            DateTime?
+  userPromotions      UserPromotion[]
+}
+
+model WorkspaceAmenities {
+  workspace_id Int
+  amenity_id   Int
+  workspace    Workspace @relation(fields: [workspace_id], references: [workspace_id])
+  amenity      Amenity   @relation(fields: [amenity_id], references: [amenity_id])
+
+  @@id([workspace_id, amenity_id])
+}
+
+model UserPromotion {
+  user_promotion_id Int       @id @default(autoincrement())
+  used_date         DateTime
+  user_id           Int
+  promotion_id      Int
+  user              User      @relation(fields: [user_id], references: [user_id])
+  promotion         Promotion @relation(fields: [promotion_id], references: [promotion_id])
+}
