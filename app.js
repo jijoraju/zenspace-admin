@@ -7,7 +7,6 @@ const cors = require('cors')
 const session = require('express-session');
 const flash = require('connect-flash');
 
-
 const router = require("./routes");
 const passport = require("./config/passport")
 const sanitizeAll = require("./middleware/sanitizeAll")

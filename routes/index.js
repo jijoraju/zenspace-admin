@@ -6,6 +6,7 @@ const {compare} = require("bcrypt");
 const jwt = require('jsonwebtoken');
 
 const userRouter = require('./user/userRouter')
+const workspaceRouter = require('./workspace/workspaceRouter')
 
 
 const router = express.Router();
@@ -38,5 +39,6 @@ router.get('/logout', (req, res) => {
 
 
 router.use('/user', userRouter);
+router.use('/workspace', workspaceRouter);
 
 module.exports = router;
