@@ -9,19 +9,18 @@
 </div>
 
 <div class="container mt-5">
-
-    <h1>Workspaces</h1>
+    <h1>Locations</h1>
     <div class="row mb-3">
         <div class="col">
-            <form class="d-flex" action="/workspace" method="GET">
+            <form class="d-flex" action="/locations" method="GET">
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search"
                        value="<%= search %>">
                 <button class="btn btn-outline-success" type="submit">Search</button>
-                <a href="/workspace" class="btn btn-outline-secondary ms-2">Clear Search</a>
+                <a href="/locations" class="btn btn-outline-secondary ms-2">Clear Search</a>
             </form>
         </div>
         <div class="col text-end">
-            <a href="/workspace/create" class="btn btn-success">Create New Workspace</a>
+            <a href="/locations/create" class="btn btn-success">Create New Location</a>
             <a href="/dashboard" class="btn btn-danger">Go Back</a>
         </div>
     </div>
@@ -30,15 +29,24 @@
         <thead>
         <tr>
             <th>Name</th>
+            <th>Province</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
             <th>Actions</th>
         </tr>
         </thead>
         <tbody>
-        <% workspaces.forEach(workspace => { %>
+        <% locations.forEach(location => { %>
             <tr>
-                <td><%= workspace.name %></td>
+                <td><%= location.name %></td>
+                <td><%= location.province %></td>
+                <td><%= location.latitude %></td>
+                <td><%= location.longitude %></td>
                 <td>
-                    <a href="/workspace/<%= workspace.workspace_id %>" class="btn btn-primary">View</a>
+                    <a href="/locations/<%= location.location_id %>/edit" class="btn btn-sm btn-secondary">Edit</a>
+                    <form action="/locations/<%= location.location_id %>/delete" method="post" class="d-inline" onsubmit="return confirm('Are you sure you want to delete this location?');">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         <% }) %>

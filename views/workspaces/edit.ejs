@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<%- include('../partials/header') %>
+<body>
+<%- include('../partials/navbar') %>
+
+<div class="container mt-5">
+    <h1>Edit Workspace</h1>
+    <form action="/workspace/<%= workspace.workspace_id %>/edit" method="post">
+        <div class="mb-3">
+            <label for="name" class="form-label">Workspace Name</label>
+            <input type="text" class="form-control" id="name" name="name" value="<%= workspace.name %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3"
+                      required><%= workspace.description %></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="price_per_day" class="form-label">Price Per Day</label>
+            <input type="number" class="form-control" id="price_per_day" name="price_per_day"
+                   value="<%= workspace.price_per_day %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="no_of_spaces" class="form-label">Number of Spaces</label>
+            <input type="number" class="form-control" id="no_of_spaces" name="no_of_spaces"
+                   value="<%= workspace.no_of_spaces %>" required>
+        </div>
+        <h3>Address Details</h3>
+        <div class="mb-3">
+            <label for="location_id" class="form-label">Location</label>
+            <select class="form-select" id="location_id" name="location_id" required>
+                <% locations.forEach(location => { %>
+                    <option value="<%= location.location_id %>" <%= location.location_id === workspace.location_id ? 'selected' : '' %>><%= location.name %></option>
+                <% }) %>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input type="text" class="form-control" id="address" name="address"
+                   value="<%= workspace.workspaceAddress.address %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input type="text" class="form-control" id="latitude" name="latitude"
+                   value="<%= workspace.workspaceAddress.latitude %>" required>
+        </div>
+        <div class="mb-3">
+            <label for="longitude" class="form-label">Longitude</label>
+            <input type="text" class="form-control" id="longitude" name="longitude"
+                   value="<%= workspace.workspaceAddress.longitude %>" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Workspace</button>
+        <a href="/workspace" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -86,34 +83,29 @@ model Review {
   workspace    Workspace @relation(fields: [workspace_id], references: [workspace_id])
 }
 
-model Payment {
-  payment_id     Int            @id @default(autoincrement())
-  amount         Float?
-  payment_date   DateTime       @default(now())
-  payment_method PaymentMethod?
-  card_id        Int
-  bookings       Booking[]
-}
-
-enum PaymentMethod {
-  credit_card
-  PayPal
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
 }
 
 model Booking {
-  booking_id    Int            @id @default(autoincrement())
-  start_date    DateTime
-  end_date      DateTime
-  booking_date  DateTime       @default(now())
-  no_of_space   Int
-  total_price   String
-  workspace_id  Int
-  user_id       Int
-  payment_id    Int
-  workspace     Workspace      @relation(fields: [workspace_id], references: [workspace_id])
-  user          User           @relation(fields: [user_id], references: [user_id])
-  payment       Payment        @relation(fields: [payment_id], references: [payment_id])
-  notifications Notification[]
+  booking_id       Int            @id @default(autoincrement())
+  bookingReference String         @unique
+  start_date       DateTime
+  end_date         DateTime?
+  booking_date     DateTime       @default(now())
+  no_of_space      Int
+  totalAmount      Float
+  taxAmount        Float
+  grandTotal       Float
+  stripeSessionId  String?
+  status           BookingStatus  @default(PENDING)
+  workspace_id     Int
+  user_id          Int
+  workspace        Workspace      @relation(fields: [workspace_id], references: [workspace_id])
+  user             User           @relation(fields: [user_id], references: [user_id])
+  notifications    Notification[]
 }
 
 model Amenity {
