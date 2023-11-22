@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "node ./bin/www",
+    "dev": "nodemon ./bin/www",
+    "build": "prisma generate"
   },
   "nodemonConfig": {
     "watch": [
@@ -13,6 +15,10 @@
     "ignore": [
       "node_modules"
     ]
+  },
+  "engines": {
+    "node": "16.17.1",
+    "npm": "8.15.0"
   },
   "dependencies": {
     "@prisma/client": "^5.5.2",
