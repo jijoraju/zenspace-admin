@@ -13,7 +13,13 @@ const sanitizeAll = require("./middleware/sanitizeAll")
 
 const app = express();
 
-const allowedOrigins = ['http://localhost:4100', "http://127.0.0.1:4100", 'https://zenspace-frontend.onrender.com','http://192.168.1.100:8888','http://192.168.1.100:8889'];
+const allowedOrigins = [
+    'http://localhost:4100',
+    "https://zenspace-admin.onrender.com",
+    'https://zenspace-frontend.onrender.com',
+    'http://192.168.1.100:8888',
+    'http://192.168.1.100:8889'
+];
 
 const corsOptions = {
     origin: function (origin, callback) {

@@ -8,6 +8,7 @@ const jwt = require('jsonwebtoken');
 const userRouter = require('./user/userRouter')
 const workspaceRouter = require('./workspace/workspaceRouter')
 const locationRouter = require('./location/locationRouter')
+const bookingRouter = require('./booking/bookingRouter')
 
 
 const router = express.Router();
@@ -42,5 +43,7 @@ router.get('/logout', (req, res) => {
 router.use('/user', userRouter);
 router.use('/workspace', workspaceRouter);
 router.use('/locations', locationRouter);
+router.use('/bookings', bookingRouter);
+
 
 module.exports = router;
