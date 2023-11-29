@@ -1,5 +1,5 @@
 const express = require('express');
-const {PrismaClient, WorkspaceType} = require("@prisma/client");
+const {PrismaClient} = require("@prisma/client");
 const {hash, genSalt} = require("bcrypt");
 const {bucket, admin} = require("../../config/firebaseAdmin");
 const multer = require("multer");
@@ -24,7 +24,7 @@ const upload = multer({
 workspaceRouter.get('/', async (req, res) => {
     let {page, size, search} = req.query;
     page = page ? parseInt(page, 10) : 1;
-    size = size ? parseInt(size, 10) : 10; 
+    size = size ? parseInt(size, 10) : 10;
     const skip = (page - 1) * size;
     const searchQuery = search ? {name: {contains: search, mode: 'insensitive'}} : {};
 
@@ -93,20 +93,67 @@ workspaceRouter.get('/:workspace_id', async (req, res) => {
     try {
         const workspace = await prisma.workspace.findUnique({
             where: {workspace_id: workspaceId}, include: {
-                workspacePhotos: true, reviews: true, location: true, workspaceAddress: true
+                workspacePhotos: true,
+                reviews: true,
+                location: true,
+                workspaceAddress: true,
+                workspaceAmenities: {
+                    include: {
+                        amenity: true
+                    }
+                }
             },
         });
+
+        const allAmenities = await prisma.amenity.findMany();
 
         if (!workspace) {
             return res.status(404).send('Workspace not found.');
         }
 
-        res.render('workspaces/details', {workspace});
+        res.render('workspaces/details', { workspace, allAmenities });
     } catch (error) {
         console.error(error);
         res.status(500).send(error.message);
     }
 });
+
+workspaceRouter.post('/:workspace_id/update-amenities', async (req, res) => {
+    const workspaceId = parseInt(req.params.workspace_id, 10);
+    let selectedAmenities = req.body.amenities;
+
+    // Ensure selectedAmenities is always an array
+    if (!Array.isArray(selectedAmenities)) {
+        selectedAmenities = selectedAmenities ? [selectedAmenities] : [];
+    }
+
+    try {
+        // Remove all current amenities
+        await prisma.workspaceAmenities.deleteMany({
+            where: { workspace_id: workspaceId }
+        });
+
+        // Add new amenities
+        const amenityPromises = selectedAmenities.map(amenityId =>
+            prisma.workspaceAmenities.create({
+                data: {
+                    workspace_id: workspaceId,
+                    amenity_id: parseInt(amenityId, 10)
+                }
+            })
+        );
+        await Promise.all(amenityPromises);
+
+        req.flash('success', 'Amenities updated successfully');
+        res.redirect(`/workspace/${workspaceId}`);
+    } catch (error) {
+        console.error(error);
+        req.flash('error', error.message);
+        res.status(500).send(error.message);
+    }
+});
+
+
 
 workspaceRouter.post('/:workspace_id/delete', async (req, res) => {
     const workspaceId = parseInt(req.params.workspace_id, 10);

@@ -4,50 +4,55 @@
 <body>
 <%- include('../partials/navbar') %>
 
-<div class="mt-3">
-    <%- include('../partials/toastbar') %>
-</div>
+<main>
+    <div class="mt-3">
+        <%- include('../partials/toastbar') %>
+    </div>
 
 
-<div class="container mt-5">
-    <h1 class="mb-4">Booking Details</h1>
+    <div class="container mt-5">
+        <h1 class="mb-4">Booking Details</h1>
 
-    <div class="card mb-4">
-        <div class="card-header">
-            Booking Information
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Reference: <%= booking.bookingReference %></h5>
-            <p class="card-text">
-                <strong>Status:</strong>
-                <span class="badge <%= booking.status === 'CANCELLED' ? 'bg-danger' : 'bg-success' %>">
+        <div class="card mb-4">
+            <div class="card-header">
+                Booking Information
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Reference: <%= booking.bookingReference %></h5>
+                <p class="card-text">
+                    <strong>Status:</strong>
+                    <span class="badge <%= booking.status === 'CANCELLED' ? 'bg-danger' : 'bg-success' %>">
                     <%= booking.status %>
                 </span>
-            </p>
-            <p class="card-text"><strong>User:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %></p>
-            <p class="card-text"><strong>Email:</strong> <%= booking.user.email %></p>
-            <p class="card-text"><strong>Workspace:</strong> <%= booking.workspace.name %></p>
-            <p class="card-text"><strong>Start Date:</strong> <%= booking.start_date.toDateString() %></p>
-            <p class="card-text"><strong>End Date:</strong> <%= booking.end_date ? booking.end_date.toDateString() : 'N/A' %></p>
+                </p>
+                <p class="card-text"><strong>User:</strong> <%= booking.user.first_name %> <%= booking.user.last_name %>
+                </p>
+                <p class="card-text"><strong>Email:</strong> <%= booking.user.email %></p>
+                <p class="card-text"><strong>Workspace:</strong> <%= booking.workspace.name %></p>
+                <p class="card-text"><strong>Start Date:</strong> <%= booking.start_date.toDateString() %></p>
+                <p class="card-text"><strong>End
+                        Date:</strong> <%= booking.end_date ? booking.end_date.toDateString() : 'N/A' %></p>
+            </div>
         </div>
-    </div>
 
-    <% if(booking.status !== 'CANCELLED') { %>
+        <% if(booking.status !== 'CANCELLED') { %>
+            <div class="mb-4">
+                <form action="/bookings/<%= booking.booking_id %>/cancel" method="POST">
+                    <button type="submit" class="btn btn-danger">Cancel Booking</button>
+                </form>
+            </div>
+        <% } else { %>
+            <div class="alert alert-info">
+                This booking has been cancelled.
+            </div>
+        <% } %>
+
         <div class="mb-4">
-            <form action="/bookings/<%= booking.booking_id %>/cancel" method="POST">
-                <button type="submit" class="btn btn-danger">Cancel Booking</button>
-            </form>
+            <a href="/bookings" class="btn btn-secondary">Back to Bookings</a>
         </div>
-    <% } else { %>
-        <div class="alert alert-info">
-            This booking has been cancelled.
-        </div>
-    <% } %>
-
-    <div class="mb-4">
-        <a href="/bookings" class="btn btn-secondary">Back to Bookings</a>
     </div>
-</div>
+
+</main>
 
 <%- include('../partials/footer') %>
 </body>

@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<%- include('../partials/header') %>
+<body>
+<%- include('../partials/navbar') %>
+
+<main>
+    <div class="mt-3">
+        <%- include('../partials/toastbar') %>
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Edit Amenity</h1>
+        <form action="/amenities/<%= amenity.amenity_id %>/edit" method="post">
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <input type="text" class="form-control" id="description" name="description"
+                       value="<%= amenity.description %>" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Amenity</button>
+        </form>
+    </div>
+
+</main>
+
+<%- include('../partials/footer') %>
+</body>
+</html>

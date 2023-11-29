@@ -6,88 +6,111 @@
 
 <%- include('partials/navbar') %>
 
-<div class="container mt-5 p-2">
-    <div class="row justify-content-center">
+<main>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div id="customCard" class="card border-start-lg border-danger-subtle h-100 position-relative p-2">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between mb-2">
-                        <div class="flex-grow-1">
-                            <h3 class="text-danger mb-2">Users</h3>
-                            <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
-                                Manage user data and perform CRUD operations.
+    <div class="container mt-5 p-2">
+        <div class="row justify-content-center">
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div id="customCard" class="card border-start-lg border-danger-subtle h-100 position-relative p-2">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-2">
+                            <div class="flex-grow-1">
+                                <h3 class="text-danger mb-2">Users</h3>
+                                <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
+                                    Manage user data and perform CRUD operations.
+                                </div>
+                            </div>
+                            <div class="ms-2">
+                                <i class="fas fa-users fa-beat fa-2x text-danger"></i>
                             </div>
                         </div>
-                        <div class="ms-2">
-                            <i class="fas fa-users fa-beat fa-2x text-danger"></i>
-                        </div>
+                        <a href="/user" class="btn btn-outline-danger">Go to Users</a>
                     </div>
-                    <a href="/user" class="btn btn-outline-danger">Go to Users</a>
                 </div>
             </div>
-        </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between mb-2">
-                        <div class="flex-grow-1">
-                            <h3 class="text-secondary mb-2">Workspace</h3>
-                            <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
-                                Manage Workspace data and perform CRUD operations.
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-2">
+                            <div class="flex-grow-1">
+                                <h3 class="text-secondary mb-2">Workspace</h3>
+                                <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
+                                    Manage Workspace data and perform CRUD operations.
+                                </div>
+                            </div>
+                            <div class="ms-2">
+                                <i class="fa-solid fa-house fa-beat fa-2x text-secondary"></i>
                             </div>
                         </div>
-                        <div class="ms-2">
-                            <i class="fa-solid fa-house fa-beat fa-2x text-secondary"></i>
-                        </div>
+                        <a href="/workspace" class="btn btn-outline-secondary">Go to Workspace</a>
                     </div>
-                    <a href="/workspace" class="btn btn-outline-secondary">Go to Workspace</a>
                 </div>
             </div>
-        </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between mb-2">
-                        <div class="flex-grow-1">
-                            <h3 class="text-info mb-2">Location</h3>
-                            <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
-                                Manage Location data and perform CRUD operations.
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-2">
+                            <div class="flex-grow-1">
+                                <h3 class="text-info mb-2">Location</h3>
+                                <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
+                                    Manage Location data and perform CRUD operations.
+                                </div>
+                            </div>
+                            <div class="ms-2">
+                                <i class="fa-solid fa-map-location-dot fa-bounce fa-2x text-info"></i>
                             </div>
                         </div>
-                        <div class="ms-2">
-                            <i class="fa-solid fa-map-location-dot fa-bounce fa-2x text-info"></i>
-                        </div>
+                        <a href="/locations" class="btn btn-outline-info">Go to Location</a>
                     </div>
-                    <a href="/locations" class="btn btn-outline-info">Go to Location</a>
                 </div>
             </div>
-        </div>
 
-        <div class="col-xl-3 col-md-6 mb-4">
-            <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
-                <div class="card-body">
-                    <div class="d-flex align-items-start justify-content-between mb-2">
-                        <div class="flex-grow-1">
-                            <h3 class="text-success mb-2">Bookings</h3>
-                            <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
-                                Manage Booking data operations.
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-2">
+                            <div class="flex-grow-1">
+                                <h3 class="text-success mb-2">Bookings</h3>
+                                <div class="text-xs text-light-emphasis d-inline-flex align-items-center">
+                                    Manage Booking data operations.
+                                </div>
+                            </div>
+                            <div class="ms-2">
+                                <i class="fa-solid fa-book fa-flip fa-2x text-success"></i>
                             </div>
                         </div>
-                        <div class="ms-2">
-                            <i class="fa-solid fa-book fa-flip fa-2x text-success"></i>
-                        </div>
+                        <a href="/bookings" class="btn btn-outline-success">Go to Bookings</a>
                     </div>
-                    <a href="/bookings" class="btn btn-outline-success">Go to Bookings</a>
                 </div>
             </div>
+
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div id="customCard" class="card border-start-lg border-secondary-subtle h-100 position-relative p-2">
+                    <div class="card-body">
+                        <div class="d-flex align-items-start justify-content-between mb-2">
+                            <div class="flex-grow-1">
+                                <h3 class="text-warning mb-2">Amenities</h3>
+                                <div class="text-xs text-warning-emphasis d-inline-flex align-items-center">
+                                    Manage Amenities crud operations.
+                                </div>
+                            </div>
+                            <div class="ms-2">
+                                <i class="fa-solid fa-puzzle-piece fa-beat fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                        <a href="/amenities" class="btn btn-warning">Go to Amenities</a>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
-
-
     </div>
-</div>
+
+</main>
 
 <%- include('partials/footer') %>
 </body>

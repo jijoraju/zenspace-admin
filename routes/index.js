@@ -9,6 +9,7 @@ const userRouter = require('./user/userRouter')
 const workspaceRouter = require('./workspace/workspaceRouter')
 const locationRouter = require('./location/locationRouter')
 const bookingRouter = require('./booking/bookingRouter')
+const amenitiesRouter = require('./amenities/amenityRouter')
 
 
 const router = express.Router();
@@ -44,6 +45,7 @@ router.use('/user', userRouter);
 router.use('/workspace', workspaceRouter);
 router.use('/locations', locationRouter);
 router.use('/bookings', bookingRouter);
+router.use('/amenities', amenitiesRouter);
 
 
 module.exports = router;
