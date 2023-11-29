@@ -27,6 +27,14 @@ router.post('/', passport.authenticate('local', {
     failureFlash: true
 }));
 
+
+router.use(authorizeAdmin);
+
+router.use((req, res, next) => {
+    res.locals.req = req;
+    next();
+});
+
 router.get('/dashboard', (req, res) => {
     res.render('dashboard', {title: 'Dashboard'});
 });
